@@ -35,3 +35,6 @@ up:
 reset: 
 	- docker compose down --volumes --remove-orphans
 	- docker system prune -af --volumes
+
+permission:
+	- chmod -R 777 .
