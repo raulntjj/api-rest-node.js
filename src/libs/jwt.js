@@ -9,7 +9,11 @@ export default fp(async (app) => {
     try {
       // await request.jwtVerify();
     } catch (err) {
-      return response.status(401).send({ message: 'Não autorizado' });
+      const statusCode = err.statusCode || 500;
+      return response.status(statusCode).send({
+        statusCode: statusCode,
+        message: err.message || 'Erro interno do servidor.',
+      });
     }
   });
 });

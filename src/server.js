@@ -14,8 +14,10 @@ app.register(prismaPlugin);
 app.register(jwtPlugin);
 
 // Routes
-app.register(userRoutes, { prefix: '/api' });
-app.register(authRoutes, { prefix: '/api' });
+app.register(async function () {
+  app.register(userRoutes, { prefix: '/api' });
+  app.register(authRoutes, { prefix: '/auth' });
+}, { prefix: '/v1' });
 
 const start = async () => {
   try {
