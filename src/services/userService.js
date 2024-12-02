@@ -20,6 +20,21 @@ export const createUser = async (data) => {
   return userModel.createUser({ ...data, password: hashedPassword });
 };
 
+
+export const updateUser = async (id, data) => {
+  const user = await userModel.updateUser(id, data);
+  
+  if (!user) {
+    throw new Error('Usuário não encontrado');
+  }
+  
+  return user;
+};
+
+export const deleteUser = async (id) => {
+  await userModel.deleteUser(id);
+};
+
 export const loginUser = async (email, password) => {
   const user = await userModel.getUserByEmail(email);
 
@@ -28,18 +43,4 @@ export const loginUser = async (email, password) => {
   }
   
   return user;
-};
-
-export const updateUser = async (id, data) => {
-  const user = await userModel.updateUser(id, data);
-
-  if (!user) {
-    throw new Error('Usuário não encontrado');
-  }
-
-  return user;
-};
-
-export const deleteUser = async (id) => {
-  await userModel.deleteUser(id);
 };

@@ -19,12 +19,16 @@ app.register(async function () {
   app.register(authRoutes, { prefix: '/auth' });
 }, { prefix: '/v1' });
 
+app.get('/ping', async function (request, response) {
+  return response.code(200).send({ ping : 'pong'});
+});
+
 const start = async () => {
   try {
     await app.listen({ port: 3000 });
     console.log('Servidor rodando em http://localhost:3000');
-  } catch (err) {
-    app.log.error(err);
+  } catch (error) {
+    app.log.error(error);
     process.exit(1);
   }
 };

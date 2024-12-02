@@ -7,12 +7,12 @@ export default fp(async (app) => {
 
   app.decorate('authenticate', async (request, response) => {
     try {
-      // await request.jwtVerify();
-    } catch (err) {
-      const statusCode = err.statusCode || 500;
+      await request.jwtVerify();
+    } catch (error) {
+      const statusCode = error.statusCode || 500;
       return response.status(statusCode).send({
         statusCode: statusCode,
-        message: err.message || 'Erro interno do servidor.',
+        message: error.message || 'Erro interno do servidor.',
       });
     }
   });
